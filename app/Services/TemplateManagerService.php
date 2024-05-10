@@ -40,5 +40,50 @@ class TemplateManagerService
         return $replaced;
     }
 
+    private function computeText($text, array $data)
+    {
+        $quote = isset($data['quote']) && $data['quote'] instanceof Quote ? $data['quote'] : null;
+        // $user = isset($data['user']) && $data['user'] instanceof User ? $data['user'] : null;
+        if ($quote) {
+            $_quoteFromRepository = QuoteRepository::getInstance()->getById($quote->id);
+            $destinationOfQuote = DestinationRepository::getInstance()->getById($quote->destination_id);
+            // dd($destinationOfQuote);
+            // Check if placeholders related to summary exist in the text
+            $containsSummaryHtml = strpos($text, '[quote:summary_html]');
+            $containsSummary = strpos($text, '[quote:summary]');
+
+            if ($containsSummaryHtml !== false || $containsSummary !== false) {
+                // Replace summary-related placeholders if they exist in the text
+                if ($containsSummaryHtml !== false) {
+                    $text = str_replace(
+                        '[quote:summary_html]',
+                        Quote::renderHtml($_quoteFromRepository),
+                        $text
+                    );
+                }
+                if ($containsSummary !== false) {
+                    $text = str_replace(
+                        '[quote:summary]',
+                        Quote::renderText($_quoteFromRepository),
+                        $text
+                    );
+                }
+            }
+
+            // Replace destination-related placeholders
+            if (strpos($text, '[quote:destination_link]') !== false) {
+                $text = str_replace('[quote:destination_link]', $this->getQuoteDestinationLink($quote), $text);
+            }
+            if (strpos($text, '[quote:destination_name]') !== false) {
+                $text = str_replace('[quote:destination_name]', $destinationOfQuote->country_name, $text);
+            }
+        }
+
+        $text = $this->replaceUserPlaceholders($text, $data);
+
+        return $text;
+    }
+
+
 
 }
