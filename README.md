@@ -4,7 +4,7 @@
 
 ## SAYNA TEST DESCRIPTION
 
-Laravel 
+###Create Models:### Create models for the entities involved in your system. For Template, Quote, Site, Destination, and User. Define their attributes and relationships according to the requirements.
 
 - [Simple, fast routing engine](https://laravel.com/docs/routing).
 
