@@ -4,19 +4,14 @@
 
 ## SAYNA TEST DESCRIPTION
 
-###Create Models:### Create models for the entities involved in your system. For Template, Quote, Site, Destination, and User. Define their attributes and methods according to the requirements.
+### Create Models:
+ Create models for the entities involved in your system. For Template, Quote, Site, Destination, and User. Define their attributes and methods according to the requirements.
+### Create SingletonTrait
+ Create a new folder called Traits and add the Singleton file.
+### Create repositories
+ Create new folder named Repository and create repositories relative to Models created before. 
 
 
 
-
-## Learning Laravel
-
-
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
 
 
