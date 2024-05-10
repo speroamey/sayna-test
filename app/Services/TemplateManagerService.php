@@ -85,5 +85,25 @@ class TemplateManagerService
     }
 
 
+    private function getQuoteDestinationLink(Quote $quote)
+    {
+        // Assuming $quote has properties like 'id' and 'site_id'
+        $url = SiteRepository::getInstance()->getById($quote->site_id)->url;
+        $destination = DestinationRepository::getInstance()->getById($quote->destination_id)->country_name;
+        return $url . '/' . $destination . '/quote/' . $quote->id;
+    }
 
+    private function replaceUserPlaceholders($text, $data)
+    {
+        // Fetch the user from the data array or from the currently authenticated user
+        $_user = isset($data['user']) && ($data['user'] instanceof User) ? $data['user'] : Auth::user();
+        // dd( strpos($text, '[user:first_name]'));
+        // Check if user-related placeholders exist in the text and if $_user is valid
+        if ($_user && strpos($text, '[user:first_name]') !== false) {
+            // Replace user-related placeholders
+            $text = str_replace('[user:first_name]', ucfirst(mb_strtolower($_user->firstname)), $text);
+        }
+
+        return $text;
+    }
 }

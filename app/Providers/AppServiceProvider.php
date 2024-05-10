@@ -22,7 +22,6 @@ class AppServiceProvider extends ServiceProvider
                 $app->make(SiteRepository::class),
             );
         });
-
     }
 
     /**
