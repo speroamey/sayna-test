@@ -9,7 +9,8 @@
 ### Create SingletonTrait
  Create a new folder called Traits and add the Singleton file; this will be used as trai in repositories.
 ### Create repositories
- Create new folder named Repository and create repositories relative to Models created before. In this folder there is a file containing an class Interface which will be implemented in other repositories.
+ Create repositories for each model to encapsulate data access logic. Implement methods in the repositories to interact, such as fetching records by ID or creating new records.
+ In this folder there is a Repository class file containing an Interface which will be implemented in others repositories.
 
 
 
